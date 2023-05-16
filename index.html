@@ -14,12 +14,15 @@
       [v-cloak] {
         display: none;
       }
+      input {
+        margin: 10px;
+        display: block;
+      }
     </style>
   </head>
   <body>
-    <div id="app" v-cçoa>
-      {{ greeting }}
-      <input @keyup.enter="greet" v-model="greeting"/>
+    <div id="app" v-cloak>
+      <login-form />
       
       <hr />
       
@@ -41,7 +44,31 @@
             this.isVisible = !this.isVisible
           },
           greet() {
-            console.log(this.greeting)
+            console.log(this.greeting
+            )
+          }
+        }
+      })
+
+      app.component("login-form", {
+        template: `
+            <form @submit.prevent="handleSubmit">
+              <h1>{{ title }}</h1>
+              <input type="email" v-model="email" />
+              <input type="password" v-model="password" />
+              <button>Log In</button>
+            </form>
+        `,
+        data() {
+          return {
+            title: 'Login Form',
+            email: '',
+            password: ''
+          }
+        },
+        methods: {
+          handleSubmit() {
+            console.log(this.email, this.password)
           }
         }
       })
